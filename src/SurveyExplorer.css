@@ -1,0 +1,39 @@
+.survey-explorer {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  height: 100vh;
+}
+
+.survey-selector {
+  padding: 20px;
+  border-right: 1px solid lightgray;
+}
+.survey-selector h3 {
+  margin-top: 4px;
+}
+
+.survey-link {
+  margin-bottom: 15px;
+  width: 100%;
+  display: block;
+}
+
+.survey-link:hover {
+  background-color: lightgray;
+}
+
+.survey-results {
+  padding: 20px;
+}
+.survey-results h2 {
+  margin-top: 0px;
+  margin-bottom: 30px;
+}
+
+.survey-question {
+  margin-bottom: 100px;
+}
+
+.question-title {
+  font-size: 20px;
+}
