@@ -1,15 +1,17 @@
 import React, { useEffect } from 'react';
 import './SurveyExplorer.css';
 import Chart from 'chart.js';
+import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
 function SurveyExplorer({ surveys }) {
   const titles = surveys.map(s => ( {id: s.surveyId, title: s.title} ));
-  const survey = surveys[0];
 
   return (
     <div className="survey-explorer">
-      <SurveySelector titles={titles}/>
-      <SurveyResults survey={survey}/>
+      <Router>
+        <SurveySelector titles={titles}/>        
+        <Route path="/:id" render={({ match }) => <SurveyResults survey={surveys.find(s => s.surveyId === parseInt(match.params.id))} match={match}/>}/>
+      </Router>
     </div>
   );
 }
@@ -17,8 +19,12 @@ function SurveyExplorer({ surveys }) {
 function SurveySelector({ titles }) {
   return (
     <div className="survey-selector"> 
-      <h3>Select a survey</h3>
-      {titles.map( ( {id, title} ) => <a className="survey-link" key={id} href={id}>{title}</a>)}
+      <h3>Surveys</h3>
+      {titles.map( ( {id, title} ) => 
+        <Link to={`${id}`} key={id}>
+          <div className="survey-link">{title}</div>
+        </Link>
+      )}
     </div>
   );
 }
