@@ -1,9 +1,3 @@
-.survey-explorer {
-  display: grid;
-  grid-template-columns: max-content 1fr;
-  height: 100vh;
-}
-
 .survey-selector {
   padding: 20px;
   border-right: 1px solid lightgray;
@@ -23,6 +17,7 @@
 }
 
 .survey-results {
+  margin-left: 190px;
   padding: 20px;
 }
 .survey-results h2 {

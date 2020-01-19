@@ -3,6 +3,11 @@ import './SurveyExplorer.css';
 import Chart from 'chart.js';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+
 function SurveyExplorer({ surveys }) {
   const titles = surveys.map(s => ( {surveyId: s.surveyId, title: s.title} ));
 
@@ -18,14 +23,17 @@ function SurveyExplorer({ surveys }) {
 
 function SurveySelector({ titles }) {
   return (
-    <div className="survey-selector"> 
-      <h3>Surveys</h3>
-      {titles.map( ( {surveyId, title} ) => 
-        <Link to={`${surveyId}`} key={surveyId}>
-          <div className="survey-link">{title}</div>
-        </Link>
-      )}
-    </div>
+    <Drawer variant="permanent" anchor="left">
+      <List>
+        {titles.map( ( {surveyId, title} ) => (
+          <Link to={`${surveyId}`} key={surveyId}>
+            <ListItem button key={surveyId}>
+              <ListItemText primary={title} />
+            </ListItem>
+          </Link>
+        ))}
+      </List>
+    </Drawer>
   );
 }
 
