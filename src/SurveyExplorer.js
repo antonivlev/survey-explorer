@@ -33,25 +33,30 @@ function SurveyResults({ survey }) {
   return (
     <div className="survey-results">
       <h2>{survey.title}</h2>
-      {/* whats the key prop for? understand */}
-      {survey.questions.map(q => <Question key={q.questionId} question={q} />)}
+      {survey.questions.map(q => <Question key={q.questionId} question={q}/>)}
     </div>
   );
 }
 
 function Question({ question }) {
-  useEffect( () => drawDistribution(question.questionId.toString(), question.answerOptions) );
+  const canvasId = "c"+question.questionId
+
+  useEffect( () => {
+    const newChart = drawDistribution(canvasId, question.answerOptions);
+    // clean up; fixes bug where mouse over caused old data to flash
+    return () => newChart.destroy();
+  } );
 
   return (
     <div className="survey-question">
       <div className="question-title">{question.questionTitle}</div>
-      <canvas id={question.questionId} width="400" height="100"></canvas>
+      <canvas id={canvasId} width="400" height="100"></canvas>
     </div>
   ); 
 }
 
 function drawDistribution(ctx, answerOptions) {
-  new Chart(ctx, {
+  return new Chart(ctx, {
     type: 'bar',
     data: {
       labels: answerOptions.map(option => option.text),
