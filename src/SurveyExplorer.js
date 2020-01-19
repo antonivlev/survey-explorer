@@ -4,13 +4,13 @@ import Chart from 'chart.js';
 import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
 
 function SurveyExplorer({ surveys }) {
-  const titles = surveys.map(s => ( {id: s.surveyId, title: s.title} ));
+  const titles = surveys.map(s => ( {surveyId: s.surveyId, title: s.title} ));
 
   return (
     <div className="survey-explorer">
       <Router>
         <SurveySelector titles={titles}/>        
-        <Route path="/:id" render={({ match }) => <SurveyResults survey={surveys.find(s => s.surveyId === parseInt(match.params.id))} match={match}/>}/>
+        <Route path="/:surveyId" render={({ match }) => <SurveyResults survey={surveys.find(s => s.surveyId === parseInt(match.params.surveyId))} match={match}/>}/>
       </Router>
     </div>
   );
@@ -20,8 +20,8 @@ function SurveySelector({ titles }) {
   return (
     <div className="survey-selector"> 
       <h3>Surveys</h3>
-      {titles.map( ( {id, title} ) => 
-        <Link to={`${id}`} key={id}>
+      {titles.map( ( {surveyId, title} ) => 
+        <Link to={`${surveyId}`} key={surveyId}>
           <div className="survey-link">{title}</div>
         </Link>
       )}
