@@ -15,7 +15,8 @@ function SurveyExplorer({ surveys }) {
     <div className="survey-explorer">
       <Router>
         <SurveySelector titles={titles}/>        
-        <Route path="/:surveyId" render={({ match }) => <SurveyResults survey={surveys.find(s => s.surveyId === parseInt(match.params.surveyId))} match={match}/>}/>
+        <Route path="/" exact render={() => <div className="survey-results"><h2>{'Select survey'}</h2></div>} />
+        <Route path="/:surveyId" render={({ match }) => <SurveyResults survey={surveys.find(s => s.surveyId === parseInt(match.params.surveyId))} />}/>
       </Router>
     </div>
   );
@@ -24,15 +25,17 @@ function SurveyExplorer({ surveys }) {
 function SurveySelector({ titles }) {
   return (
     <Drawer variant="permanent" anchor="left">
-      <List>
-        {titles.map( ( {surveyId, title} ) => (
-          <Link to={`${surveyId}`} key={surveyId}>
-            <ListItem button key={surveyId}>
-              <ListItemText primary={title} />
-            </ListItem>
-          </Link>
-        ))}
-      </List>
+      <div class="survey-nav">
+        <List>
+          {titles.map( ( {surveyId, title} ) => (
+            <Link to={`${surveyId}`} key={surveyId}>
+              <ListItem button key={surveyId}>
+                <ListItemText primary={title} />
+              </ListItem>
+            </Link>
+          ))}
+        </List>
+      </div>
     </Drawer>
   );
 }
