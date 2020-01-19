@@ -25,7 +25,7 @@ function SurveyExplorer({ surveys }) {
 function SurveySelector({ titles }) {
   return (
     <Drawer variant="permanent" anchor="left">
-      <div class="survey-nav">
+      <div className="survey-nav">
         <List>
           {titles.map( ( {surveyId, title} ) => (
             <Link to={`${surveyId}`} key={surveyId}>
@@ -61,7 +61,7 @@ function Question({ question }) {
   return (
     <div className="survey-question">
       <div className="question-title">{question.questionTitle}</div>
-      <canvas id={canvasId} width="400" height="100"></canvas>
+      <canvas id={canvasId} width="300" height="100"></canvas>
     </div>
   ); 
 }

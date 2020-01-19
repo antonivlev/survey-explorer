@@ -2,7 +2,10 @@
 
 To run:
 
-`$ yarn `
+```
+$ yarn 
+$ yarn start
+```
 
-`$ yarn start`
+Go to ```localhost:3000```
 
